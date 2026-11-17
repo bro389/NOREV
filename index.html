@@ -1,0 +1,161 @@
+
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NOREV | Perfume Store</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#101010;color:#fff;font-family:Arial,sans-serif}
+header{padding:22px 7%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #333;position:sticky;top:0;background:#101010;z-index:5}
+.logo{font-size:27px;letter-spacing:7px;font-weight:bold;color:#d6b77a}
+button{cursor:pointer;border:0;padding:12px 18px;background:#d6b77a;color:#111;font-weight:bold;border-radius:4px}
+button:hover{background:#f0d49a}
+nav{display:flex;gap:10px;align-items:center}
+nav button{background:transparent;color:white;border:1px solid #555}
+.hero{text-align:center;padding:85px 20px;background:linear-gradient(120deg,#171717,#33291d)}
+.hero h1{font-size:48px;letter-spacing:9px;margin:0 0 15px}
+.hero p{color:#c5c5c5}
+h2{text-align:center;margin:45px 0 25px;letter-spacing:3px}
+.products{padding:0 7% 60px;display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:22px}
+.product{background:#1c1c1c;border:1px solid #333;border-radius:7px;overflow:hidden;text-align:center;padding-bottom:20px}
+.product img{width:100%;height:220px;object-fit:cover;background:#29231b}
+.product h3{margin:17px 5px 8px}
+.product p{color:#d6b77a;font-size:19px}
+.product button{margin-top:5px}
+.panel{display:none;padding:25px 7%;background:#1c1c1c;border-top:1px solid #444}
+.panel h2{margin-top:10px}
+.cart-item{display:flex;justify-content:space-between;align-items:center;gap:10px;border-bottom:1px solid #444;padding:12px 0}
+.cart-item button{padding:7px 12px}
+input{display:block;width:100%;max-width:350px;padding:13px;margin:12px auto;background:#111;border:1px solid #555;color:white;border-radius:4px}
+footer{text-align:center;padding:30px;color:#888;border-top:1px solid #333}
+.total{font-size:22px;color:#d6b77a}
+@media(max-width:500px){header{padding:15px 4%;}.logo{font-size:21px}nav{gap:5px}nav button{padding:9px 10px}.hero h1{font-size:34px}}
+</style>
+</head>
+<body>
+
+<header>
+<div class="logo">NOREV</div>
+<nav>
+<button onclick="showPanel('cart')">Koszyk (<span id="count">0</span>)</button>
+<button onclick="showPanel('account')">Konto</button>
+</nav>
+</header>
+
+<section class="hero">
+<h1>NOREV</h1>
+<p>Zapach, który zostaje w pamięci.</p>
+<button onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})">ODKRYJ KOLEKCJĘ</button>
+</section>
+
+<h2>NASZA KOLEKCJA</h2>
+<section class="products" id="shop"></section>
+
+<section class="panel" id="cart">
+<h2>TWÓJ KOSZYK</h2>
+<div id="cartItems"></div>
+<p class="total" id="total">Razem: 0 zł</p>
+<button onclick="alert('To wersja demonstracyjna sklepu. Zamówienia nie są jeszcze realizowane.')">PRZEJDŹ DO ZAMÓWIENIA</button>
+</section>
+
+<section class="panel" id="account">
+<h2>TWOJE KONTO</h2>
+<p style="text-align:center;color:#bbb">Wersja demonstracyjna – konto działa tylko w tej przeglądarce.</p>
+<input id="userName" placeholder="Twoje imię">
+<input id="userEmail" type="email" placeholder="Twój e-mail">
+<button style="display:block;margin:auto" onclick="login()">ZALOGUJ DEMONSTRACYJNIE</button>
+<p id="accountStatus" style="text-align:center"></p>
+</section>
+
+<footer>
+NOREV © 2026 | Perfume Store
+<p>Wersja demonstracyjna sklepu internetowego</p>
+</footer>
+
+<script>
+const products=[
+{name:"Versace Eros",price:299,img:"https://images.unsplash.com/photo-1594035910387-fea47794261f?w=500"},
+{name:"Dior Sauvage",price:389,img:"https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=500"},
+{name:"Yves Saint Laurent Y",price:349,img:"https://images.unsplash.com/photo-1590736969955-71cc94901144?w=500"},
+{name:"Armani Stronger With You",price:369,img:"https://images.unsplash.com/photo-1595425970377-c9703cf48b6d?w=500"},
+{name:"Bleu de Chanel",price:459,img:"https://images.unsplash.com/photo-1594035910387-fea47794261f?w=500"},
+{name:"Paco Rabanne 1 Million",price:329,img:"https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=500"},
+{name:"Jean Paul Gaultier Le Male",price:379,img:"https://images.unsplash.com/photo-1590736969955-71cc94901144?w=500"},
+{name:"Carolina Herrera Bad Boy",price:399,img:"https://images.unsplash.com/photo-1595425970377-c9703cf48b6d?w=500"},
+{name:"La Vie Est Belle",price:359,img:"https://images.unsplash.com/photo-1594035910387-fea47794261f?w=500"},
+{name:"Baccarat Rouge 540",price:699,img:"https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=500"}
+];
+
+let cart=JSON.parse(localStorage.getItem("norevCart")||"{}");
+
+function renderProducts(){
+document.getElementById("shop").innerHTML=products.map((p,i)=>`
+<div class="product">
+<img src="${p.img}" alt="${p.name}" loading="lazy">
+<h3>${p.name}</h3>
+<p>${p.price} zł</p>
+<button onclick="addToCart(${i})">DODAJ DO KOSZYKA</button>
+</div>`).join("");
+}
+
+function addToCart(i){
+cart[i]=(cart[i]||0)+1;
+saveCart();
+alert("Dodano produkt do koszyka!");
+}
+
+function saveCart(){
+localStorage.setItem("norevCart",JSON.stringify(cart));
+renderCart();
+}
+
+function renderCart(){
+let html="",sum=0,count=0;
+Object.keys(cart).forEach(key=>{
+let p=products[key],qty=cart[key];
+if(qty>0){
+sum+=p.price*qty;
+count+=qty;
+html+=`<div class="cart-item">
+<span>${p.name} × ${qty}</span>
+<span>${p.price*qty} zł</span>
+<button onclick="removeItem(${key})">Usuń</button>
+</div>`;
+}
+});
+document.getElementById("cartItems").innerHTML=html||"<p>Twój koszyk jest pusty.</p>";
+document.getElementById("total").innerText="Razem: "+sum+" zł";
+document.getElementById("count").innerText=count;
+}
+
+function removeItem(i){
+delete cart[i];
+saveCart();
+}
+
+function showPanel(id){
+document.querySelectorAll(".panel").forEach(p=>p.style.display="none");
+let panel=document.getElementById(id);
+panel.style.display="block";
+panel.scrollIntoView({behavior:"smooth"});
+if(id==="cart")renderCart();
+}
+
+function login(){
+let name=document.getElementById("userName").value.trim();
+let email=document.getElementById("userEmail").value.trim();
+if(!name||!email||!email.includes("@")){
+document.getElementById("accountStatus").innerText="Wpisz imię i poprawny e-mail.";
+return;
+}
+localStorage.setItem("norevUser",JSON.stringify({name,email}));
+document.getElementById("accountStatus").innerText="Witaj w NOREV, "+name+"!";
+}
+
+renderProducts();
+renderCart();
+</script>
+</body>
+</html>
