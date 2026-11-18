@@ -5,535 +5,205 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NOREV | Only for Men</title>
-
 <style>
-:root{
---gold:#d5ad63;
---bg:#090909;
---panel:#151515;
-}
-
+:root{--gold:#d6b36a;--bg:#090909;--panel:#151515;--muted:#aaa}
 *{box-sizing:border-box}
-
-body{
-margin:0;
-background:var(--bg);
-color:#fff;
-font-family:Arial,sans-serif;
-}
-
-header{
-position:sticky;
-top:0;
-z-index:5;
-background:#090909ed;
-border-bottom:1px solid #302719;
-padding:17px 5%;
-display:flex;
-align-items:center;
-justify-content:space-between;
-}
-
-.logo{
-font-size:29px;
-font-weight:900;
-letter-spacing:7px;
-color:var(--gold);
-}
-
-button{cursor:pointer}
-
-.goldbtn{
-background:var(--gold);
-color:#111;
-border:0;
-padding:12px 18px;
-border-radius:5px;
-font-weight:bold;
-}
-
-.hero{
-text-align:center;
-padding:80px 15px 65px;
-background:radial-gradient(ellipse at center,#302619 0%,#090909 70%);
-}
-
-.hero h1{
-font-size:clamp(38px,8vw,70px);
-letter-spacing:5px;
-margin:0;
-}
-
-.hero h1 span{color:var(--gold)}
-
-.hero p{
-color:#aaa;
-letter-spacing:4px;
-}
-
-.tools{
-max-width:1100px;
-margin:28px auto;
-padding:0 15px;
-display:flex;
-gap:10px;
-flex-wrap:wrap;
-}
-
-input,select{
-background:#171717;
-color:white;
-border:1px solid #383838;
-padding:13px;
-border-radius:5px;
-flex:1;
-min-width:150px;
-}
-
-/* PRODUKTY - DWA OBOK SIEBIE */
-
-.products{
-max-width:1100px;
-margin:20px auto 70px;
-padding:0 12px;
-display:grid;
-grid-template-columns:repeat(2,minmax(0,1fr));
-gap:14px;
-}
-
-.card{
-background:var(--panel);
-border:1px solid #292929;
-border-radius:9px;
-overflow:hidden;
-transition:.3s;
-position:relative;
-animation:appear .5s ease both;
-min-width:0;
-}
-
-@keyframes appear{
-from{opacity:0;transform:translateY(18px)}
-to{opacity:1;transform:translateY(0)}
-}
-
-.card:hover{
-transform:translateY(-5px);
-border-color:var(--gold);
-box-shadow:0 12px 35px #000;
-}
-
-.photo{
-height:210px;
-background:linear-gradient(145deg,#25211b,#101010);
-display:flex;
-align-items:center;
-justify-content:center;
-overflow:hidden;
-}
-
-.photo img{
-width:100%;
-height:100%;
-object-fit:contain;
-padding:8px;
-transition:transform .4s;
-}
-
-.card:hover img{transform:scale(1.08)}
-
-.info{padding:12px}
-
-.info h3{
-font-size:15px;
-margin:0 0 8px;
-min-height:34px;
-}
-
-.info p{
-color:#999;
-font-size:12px;
-min-height:30px;
-margin:5px 0;
-}
-
-.price{
-color:var(--gold);
-font-size:19px;
-font-weight:bold;
-margin:12px 0;
-}
-
-.actions{
-display:flex;
-gap:6px;
-}
-
-.add{
-flex:1;
-background:var(--gold);
-border:0;
-padding:10px 5px;
-border-radius:5px;
-font-size:11px;
-font-weight:bold;
-transition:.2s;
-}
-
-.add:active{transform:scale(.94)}
-
-.heart{
-background:#292929;
-color:white;
-border:0;
-border-radius:5px;
-padding:8px 10px;
-font-size:19px;
-}
-
-.heart.active{
-color:#ff526e;
-animation:pop .25s;
-}
-
-@keyframes pop{
-50%{transform:scale(1.35)}
-}
-
-footer{
-text-align:center;
-padding:35px;
-color:#777;
-border-top:1px solid #292929;
-}
-
-footer .logo{font-size:24px}
-
-.overlay{
-display:none;
-position:fixed;
-inset:0;
-background:#000b;
-z-index:10;
-}
-
-.overlay.show{display:block}
-
-.drawer{
-position:absolute;
-right:0;
-top:0;
-height:100%;
-width:min(420px,100%);
-background:#141414;
-padding:23px;
-overflow:auto;
-animation:slide .3s;
-}
-
-@keyframes slide{
-from{transform:translateX(100%)}
-to{transform:translateX(0)}
-}
-
-.drawer h2{color:var(--gold)}
-
-.close{
-float:right;
-background:none;
-color:white;
-border:0;
-font-size:28px;
-}
-
-.cartrow{
-display:flex;
-justify-content:space-between;
-gap:12px;
-padding:14px 0;
-border-bottom:1px solid #333;
-}
-
-.cartrow button{
-background:#333;
-color:white;
-border:0;
-padding:6px 10px;
-}
-
-.toast{
-position:fixed;
-bottom:20px;
-left:50%;
-transform:translate(-50%,100px);
-background:var(--gold);
-color:#111;
-padding:14px 22px;
-border-radius:7px;
-transition:.3s;
-z-index:20;
-font-weight:bold;
-}
-
+body{margin:0;background:var(--bg);color:#f5f1e9;font-family:Arial,sans-serif}
+header{padding:22px 5%;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #292929;position:sticky;top:0;background:#090909ed;z-index:10;backdrop-filter:blur(12px)}
+.logo{font-size:28px;letter-spacing:7px;color:var(--gold);font-weight:800}
+nav{display:flex;gap:18px;align-items:center}
+button{cursor:pointer;border:0}
+.navbtn{background:none;color:white;font-size:14px}
+.hero{padding:65px 20px 55px;text-align:center;background:radial-gradient(ellipse at center,#292115 0%,#090909 65%)}
+.hero small{letter-spacing:5px;color:var(--gold)}
+.hero h1{font-size:clamp(38px,8vw,76px);letter-spacing:5px;margin:18px 0}
+.hero p{color:#bbb;line-height:1.6}
+.goldbtn{background:var(--gold);color:#111;padding:14px 25px;border-radius:3px;font-weight:bold;margin-top:15px}
+main{max-width:1200px;margin:auto;padding:35px 18px}
+.sectiontop{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:22px}
+h2{font-size:25px;letter-spacing:2px}
+.controls{display:flex;gap:9px;flex-wrap:wrap}
+input,select{background:#171717;color:white;border:1px solid #393939;padding:12px;border-radius:4px;min-width:0}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.product{background:var(--panel);border:1px solid #282828;border-radius:7px;overflow:hidden;position:relative;transition:.25s}
+.product:hover{transform:translateY(-5px);border-color:var(--gold)}
+.photo{height:190px;background:#202020;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.photo img{width:100%;height:100%;object-fit:contain;padding:10px;transition:.4s}
+.product:hover img{transform:scale(1.06)}
+.info{padding:13px}
+.brand{font-size:10px;color:var(--gold);letter-spacing:2px}
+.info h3{font-size:15px;margin:8px 0}
+.desc{font-size:12px;color:#aaa;min-height:28px}
+.price{font-size:19px;font-weight:bold;margin:12px 0;color:var(--gold)}
+.add{background:var(--gold);color:#111;padding:11px 8px;width:100%;font-weight:bold;border-radius:3px}
+.heart{position:absolute;right:9px;top:9px;background:#111c;color:white;border-radius:50%;width:34px;height:34px;font-size:20px;z-index:2}
+.heart.active{color:#e85b68}
+footer{text-align:center;padding:35px 15px;color:#777;border-top:1px solid #292929;margin-top:40px;font-size:12px}
+.overlay{display:none;position:fixed;inset:0;background:#000b;z-index:30;justify-content:center;align-items:center;padding:15px}
+.overlay.show{display:flex}
+.modal{background:#171717;border:1px solid #55472d;padding:23px;width:min(440px,100%);max-height:85vh;overflow:auto;border-radius:8px}
+.modal h2{color:var(--gold);margin-top:0}
+.close{float:right;background:none;color:white;font-size:24px}
+.cartitem{display:flex;justify-content:space-between;gap:10px;padding:12px 0;border-bottom:1px solid #333}
+.cartitem button{background:#333;color:white;padding:5px 9px}
+.total{font-size:20px;color:var(--gold);font-weight:bold;margin:20px 0}
+.method{display:block;width:100%;text-align:left;background:#252525;color:white;padding:13px;margin:8px 0;border:1px solid #444;border-radius:4px}
+.method:focus,.method:hover{border-color:var(--gold)}
+.toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,100px);background:var(--gold);color:#111;padding:13px 20px;border-radius:5px;z-index:50;transition:.3s;font-weight:bold}
 .toast.show{transform:translate(-50%,0)}
-
-.empty{
-text-align:center;
-color:#999;
-padding:20px;
-}
-
-/* WIĘKSZE EKRANY */
-
-@media(min-width:700px){
-.products{
-grid-template-columns:repeat(3,minmax(0,1fr));
-gap:22px;
-}
-
-.photo{height:270px}
-
-.info{padding:17px}
-
-.info h3{font-size:17px}
-
-.info p{font-size:13px}
-
-.add{font-size:13px;padding:12px}
-}
-
-@media(min-width:1000px){
-.products{
-grid-template-columns:repeat(4,minmax(0,1fr));
-}
-}
+.empty{color:#aaa;text-align:center;padding:20px}
+@media(min-width:650px){.grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}.photo{height:250px}.info{padding:18px}}
+@media(min-width:950px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
 </style>
 </head>
-
 <body>
-
 <header>
 <div class="logo">NOREV</div>
-<button class="goldbtn" onclick="openCart()">
-🛒 KOSZYK (<span id="count">0</span>)
-</button>
+<nav>
+<button class="navbtn" onclick="showFavorites()">♡ Ulubione</button>
+<button class="navbtn" onclick="openCart()">🛒 Koszyk (<span id="count">0</span>)</button>
+</nav>
 </header>
 
 <section class="hero">
-<h1>ONLY <span>FOR MEN</span></h1>
-<p>CHARAKTER • STYL • ZAPACH</p>
+<small>ONLY FOR MEN</small>
+<h1>YOUR STYLE.<br>YOUR SCENT.</h1>
+<p>Zapach, który zostaje w pamięci.<br>Odkryj kolekcję męskich perfum NOREV.</p>
+<button class="goldbtn" onclick="document.getElementById('shop').scrollIntoView({behavior:'smooth'})">ODKRYJ KOLEKCJĘ</button>
 </section>
 
-<div class="tools">
+<main id="shop">
+<div class="sectiontop">
+<h2>KOLEKCJA</h2>
+<div class="controls">
 <input id="search" placeholder="Szukaj perfum..." oninput="render()">
-
 <select id="sort" onchange="render()">
-<option value="default">Domyślne sortowanie</option>
-<option value="asc">Cena: od najniższej</option>
-<option value="desc">Cena: od najwyższej</option>
-</select>
-
-<select id="filter" onchange="render()">
-<option value="all">Wszystkie zapachy</option>
-<option value="fresh">Świeże</option>
-<option value="intense">Intensywne</option>
-<option value="elegant">Eleganckie</option>
+<option value="default">Sortuj</option>
+<option value="low">Cena: rosnąco</option>
+<option value="high">Cena: malejąco</option>
 </select>
 </div>
-
-<main class="products" id="products"></main>
+</div>
+<div class="grid" id="products"></div>
+</main>
 
 <footer>
 <div class="logo">NOREV</div>
-<p>MEN'S FRAGRANCES</p>
-<p>Sklep demonstracyjny – zamówienia i płatności nie są aktywne.</p>
+<p>ONLY FOR MEN · DEMO SKLEPU</p>
+<p>Ta strona jest wersją demonstracyjną. Produkty i ceny są przykładowe. Zamówienia i płatności nie są realizowane.</p>
 </footer>
 
-<div class="overlay" id="overlay" onclick="if(event.target===this)closeCart()">
-<div class="drawer">
-<button class="close" onclick="closeCart()">×</button>
-<h2>Twój koszyk</h2>
-<div id="cartitems"></div>
-<h3 id="total">Razem: 0 zł</h3>
-<p style="color:#999;font-size:12px">
-Wersja demonstracyjna – brak prawdziwych płatności.
-</p>
+<div class="overlay" id="cartModal" onclick="outsideClose(event,'cartModal')">
+<div class="modal">
+<button class="close" onclick="closeModal('cartModal')">×</button>
+<h2>TWÓJ KOSZYK</h2>
+<div id="cartItems"></div>
+<div class="total" id="total">Razem: 0 zł</div>
+<button class="goldbtn" style="width:100%" onclick="checkout()">PRZEJDŹ DO PŁATNOŚCI</button>
 </div>
 </div>
 
-<div class="toast" id="toast"></div>
+<div class="overlay" id="payModal" onclick="outsideClose(event,'payModal')">
+<div class="modal">
+<button class="close" onclick="closeModal('payModal')">×</button>
+<h2>WYBIERZ PŁATNOŚĆ</h2>
+<p style="color:#aaa">To tylko demonstracja — nie podawaj prawdziwych danych.</p>
+<button class="method" onclick="paid('BLIK')">BLIK</button>
+<button class="method" onclick="paid('Szybki przelew')">Szybki przelew</button>
+<button class="method" onclick="paid('Karta')">Karta płatnicza</button>
+<button class="method" onclick="paid('Google Pay')">Google Pay</button>
+<button class="method" onclick="paid('Apple Pay')">Apple Pay</button>
+</div>
+</div>
+
+<div class="toast" id="toast">Dodano do koszyka!</div>
 
 <script>
-
 const products=[
-{id:1,name:"Versace Eros",desc:"Świeży, wyrazisty i energetyczny",price:190,cat:"fresh",img:"https://fimgs.net/mdimg/perfume/375x500.16657.jpg"},
-{id:2,name:"Dior Sauvage",desc:"Mocny, świeży i nowoczesny",price:190,cat:"fresh",img:"https://fimgs.net/mdimg/perfume/375x500.31861.jpg"},
-{id:3,name:"Jean Paul Gaultier Le Male",desc:"Klasyczny i charakterystyczny",price:190,cat:"elegant",img:"https://fimgs.net/mdimg/perfume/375x500.430.jpg"},
-{id:4,name:"Paco Rabanne 1 Million",desc:"Wyrazisty zapach na wieczór",price:190,cat:"intense",img:"https://fimgs.net/mdimg/perfume/375x500.3745.jpg"},
-{id:5,name:"Bleu de Chanel",desc:"Elegancki i ponadczasowy",price:190,cat:"elegant",img:"https://fimgs.net/mdimg/perfume/375x500.9099.jpg"},
-{id:6,name:"Yves Saint Laurent Y",desc:"Nowoczesny i świeży",price:190,cat:"fresh",img:"https://fimgs.net/mdimg/perfume/375x500.43697.jpg"},
-{id:7,name:"Hugo Boss Bottled",desc:"Klasyczny, ciepły charakter",price:190,cat:"elegant",img:"https://fimgs.net/mdimg/perfume/375x500.383.jpg"},
-{id:8,name:"Azzaro The Most Wanted",desc:"Intensywny i zmysłowy",price:190,cat:"intense",img:"https://fimgs.net/mdimg/perfume/375x500.65914.jpg"},
-{id:9,name:"Armani Acqua di Giò",desc:"Lekki, morski i świeży",price:190,cat:"fresh",img:"https://fimgs.net/mdimg/perfume/375x500.410.jpg"},
-{id:10,name:"Valentino Uomo Born in Roma",desc:"Nowoczesny i wyrazisty",price:190,cat:"intense",img:"https://fimgs.net/mdimg/perfume/375x500.55805.jpg"}
+{id:1,name:"Versace Eros",brand:"VERSACE",price:249,desc:"Świeży i energetyczny",img:"https://fimgs.net/mdimg/perfume/375x500.16657.jpg"},
+{id:2,name:"Dior Sauvage",brand:"DIOR",price:299,desc:"Mocny i nowoczesny",img:"https://fimgs.net/mdimg/perfume/375x500.31861.jpg"},
+{id:3,name:"Bleu de Chanel",brand:"CHANEL",price:349,desc:"Elegancki i ponadczasowy",img:"https://fimgs.net/mdimg/perfume/375x500.9099.jpg"},
+{id:4,name:"Stronger With You",brand:"ARMANI",price:289,desc:"Ciepły i charakterystyczny",img:"https://fimgs.net/mdimg/perfume/375x500.33379.jpg"},
+{id:5,name:"Y Eau de Parfum",brand:"YSL",price:279,desc:"Świeży i nowoczesny",img:"https://fimgs.net/mdimg/perfume/375x500.43697.jpg"},
+{id:6,name:"Le Male",brand:"JEAN PAUL GAULTIER",price:269,desc:"Klasyczny i wyrazisty",img:"https://fimgs.net/mdimg/perfume/375x500.430.jpg"},
+{id:7,name:"Invictus",brand:"PACO RABANNE",price:259,desc:"Sportowy i energetyczny",img:"https://fimgs.net/mdimg/perfume/375x500.18471.jpg"},
+{id:8,name:"The Most Wanted",brand:"AZZARO",price:279,desc:"Intensywny i wyrazisty",img:"https://fimgs.net/mdimg/perfume/375x500.65914.jpg"},
+{id:9,name:"Born in Roma",brand:"VALENTINO",price:299,desc:"Nowoczesny i elegancki",img:"https://fimgs.net/mdimg/perfume/375x500.55805.jpg"},
+{id:10,name:"Luna Rossa",brand:"PRADA",price:269,desc:"Lekki i świeży",img:"https://fimgs.net/mdimg/perfume/375x500.1592.jpg"}
 ];
 
-let cart=[];
-
-let favorites=JSON.parse(
-localStorage.getItem("norev-favorites")||"[]"
-);
+let cart={};
+let favorites=new Set();
+let onlyFavorites=false;
 
 function render(){
-
-const search=document.getElementById("search").value.toLowerCase();
-const filter=document.getElementById("filter").value;
-const sort=document.getElementById("sort").value;
-
-let list=products.filter(p=>
-p.name.toLowerCase().includes(search)&&
-(filter==="all"||p.cat===filter)
-);
-
-if(sort==="asc")list.sort((a,b)=>a.price-b.price);
-if(sort==="desc")list.sort((a,b)=>b.price-a.price);
-
-document.getElementById("products").innerHTML=list.map(p=>`
-
-<article class="card">
-
-<div class="photo">
-<img src="${p.img}" alt="${p.name}" loading="lazy"
-onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1594035910387-fea47794261f?w=600&auto=format&fit=crop'">
-</div>
-
+let list=[...products];
+const q=document.getElementById('search').value.toLowerCase();
+list=list.filter(p=>(p.name+" "+p.brand).toLowerCase().includes(q));
+if(onlyFavorites)list=list.filter(p=>favorites.has(p.id));
+const sort=document.getElementById('sort').value;
+if(sort==='low')list.sort((a,b)=>a.price-b.price);
+if(sort==='high')list.sort((a,b)=>b.price-a.price);
+document.getElementById('products').innerHTML=list.length?list.map(p=>`
+<div class="product">
+<button class="heart ${favorites.has(p.id)?'active':''}" onclick="toggleFavorite(${p.id})">${favorites.has(p.id)?'♥':'♡'}</button>
+<div class="photo"><img src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.onerror=null;this.src='https://placehold.co/300x380/202020/d6b36a?text=NOREV'"></div>
 <div class="info">
+<div class="brand">${p.brand}</div>
 <h3>${p.name}</h3>
-<p>${p.desc}</p>
-
+<div class="desc">${p.desc}</div>
 <div class="price">${p.price} zł</div>
-
-<div class="actions">
-<button class="add" onclick="addCart(${p.id})">
-DODAJ DO KOSZYKA
-</button>
-
-<button class="heart ${favorites.includes(p.id)?"active":""}"
-onclick="toggleFavorite(${p.id})">
-${favorites.includes(p.id)?"♥":"♡"}
-</button>
-</div>
-</div>
-</article>
-
-`).join("");
-
-if(!list.length){
-document.getElementById("products").innerHTML=
-'<p class="empty">Nie znaleziono perfum.</p>';
+<button class="add" onclick="addToCart(${p.id})">DODAJ DO KOSZYKA</button>
+</div></div>`).join(''):'<p class="empty">Nie znaleziono produktów.</p>';
 }
-}
-
-function toast(message){
-
-const t=document.getElementById("toast");
-t.textContent=message;
-t.classList.add("show");
-
-clearTimeout(window.toastTimer);
-
-window.toastTimer=setTimeout(
-()=>t.classList.remove("show"),2000
-);
-}
-
-function addCart(id){
-
-const p=products.find(x=>x.id===id);
-const item=cart.find(x=>x.id===id);
-
-if(item)item.qty++;
-else cart.push({...p,qty:1});
-
-updateCart();
-toast("✓ Dodano do koszyka!");
-}
-
 function toggleFavorite(id){
-
-favorites=favorites.includes(id)
-?favorites.filter(x=>x!==id)
-:[...favorites,id];
-
-localStorage.setItem(
-"norev-favorites",
-JSON.stringify(favorites)
-);
-
-render();
-
-toast(
-favorites.includes(id)
-?"Dodano do ulubionych ♥"
-:"Usunięto z ulubionych"
-);
+favorites.has(id)?favorites.delete(id):favorites.add(id);
+render();toast('Zaktualizowano ulubione');
 }
-
+function showFavorites(){
+onlyFavorites=!onlyFavorites;
+document.querySelector('h2').textContent=onlyFavorites?'ULUBIONE':'KOLEKCJA';
+render();
+document.getElementById('shop').scrollIntoView({behavior:'smooth'});
+}
+function addToCart(id){
+cart[id]=(cart[id]||0)+1;
+updateCart();toast('Dodano do koszyka!');
+}
 function updateCart(){
-
-document.getElementById("count").textContent=
-cart.reduce((s,p)=>s+p.qty,0);
-
-document.getElementById("cartitems").innerHTML=
-cart.length?cart.map(p=>`
-
-<div class="cartrow">
-<div>
-<b>${p.name}</b><br>
-<small>${p.price} zł × ${p.qty}</small>
-</div>
-
-<div>
-<button onclick="changeQty(${p.id},-1)">−</button>
-<button onclick="changeQty(${p.id},1)">+</button>
-</div>
-</div>
-
-`).join("")
-:'<p class="empty">Twój koszyk jest pusty.</p>';
-
-document.getElementById("total").textContent=
-"Razem: "+
-cart.reduce((s,p)=>s+p.price*p.qty,0)+
-" zł";
+let count=Object.values(cart).reduce((a,b)=>a+b,0);
+document.getElementById('count').textContent=count;
+let items=Object.entries(cart);
+document.getElementById('cartItems').innerHTML=items.length?items.map(([id,n])=>{
+let p=products.find(x=>x.id==id);
+return `<div class="cartitem"><div><b>${p.name}</b><br><span style="color:#d6b36a">${p.price*n} zł</span></div><div><button onclick="changeQty(${id},-1)">−</button> ${n} <button onclick="changeQty(${id},1)">+</button></div></div>`;
+}).join(''):'<p class="empty">Twój koszyk jest pusty.</p>';
+let total=items.reduce((s,[id,n])=>s+products.find(p=>p.id==id).price*n,0);
+document.getElementById('total').textContent='Razem: '+total+' zł';
 }
-
-function changeQty(id,n){
-
-const p=cart.find(x=>x.id===id);
-if(!p)return;
-
-p.qty+=n;
-
-if(p.qty<=0){
-cart=cart.filter(x=>x.id!==id);
-}
-
+function changeQty(id,delta){
+cart[id]=(cart[id]||0)+delta;
+if(cart[id]<=0)delete cart[id];
 updateCart();
 }
-
-function openCart(){
-document.getElementById("overlay").classList.add("show");
+function openCart(){updateCart();document.getElementById('cartModal').classList.add('show')}
+function closeModal(id){document.getElementById(id).classList.remove('show')}
+function outsideClose(e,id){if(e.target.id===id)closeModal(id)}
+function checkout(){
+if(!Object.keys(cart).length){toast('Koszyk jest pusty');return}
+closeModal('cartModal');document.getElementById('payModal').classList.add('show');
 }
-
-function closeCart(){
-document.getElementById("overlay").classList.remove("show");
+function paid(method){
+closeModal('payModal');
+cart={};updateCart();
+toast('Demo: wybrano '+method+' — bez prawdziwej płatności');
 }
-
-render();
-updateCart();
-
+let toastTimer;
+function toast(msg){
+let el=document.getElementById('toast');el.textContent=msg;el.classList.add('show');
+clearTimeout(toastTimer);toastTimer=setTimeout(()=>el.classList.remove('show'),2200);
+}
+render();updateCart();
 </script>
-
 </body>
 </html>
